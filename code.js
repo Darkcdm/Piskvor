@@ -4,7 +4,7 @@ let GameArea = {
 };
 
 let InputArea = {
-	inputField: document.createElement("form"),
+	inputField: document.createElement("div"),
 
 	size: document.createElement("input"),
 	winLength: document.createElement("input"),
@@ -23,10 +23,46 @@ let InputArea = {
 
 		this.playButton.innerText = "Let's Play";
 
+		this.playButton.onclick = function () {
+			InputArea.collectData();
+		};
+		this.inputField.id = "inputField";
+
 		this.inputField.appendChild(this.size);
 		this.inputField.appendChild(this.winLength);
 		this.inputField.appendChild(this.playButton);
 
 		document.getElementById("body").appendChild(this.inputField);
+	},
+
+	collectData: function () {
+		sizeValue = this.size.value;
+		winLengthValue = this.winLength.value;
+		sizeValue = parseInt(sizeValue);
+		winLengthValue = parseInt(winLengthValue);
+		//typeof sizeValue != "number"
+		//sizeValue == null || sizeValue == " " || sizeValue == ""
+		if (isNaN(sizeValue)) {
+			console.log("size is not set");
+			console.log(typeof sizeValue);
+			console.log(sizeValue);
+			return;
+		}
+		if (typeof winLengthValue != "number") {
+			console.log("winLength is not set");
+			console.log(winLengthValue);
+			console.log(isNaN(winLengthValue));
+			return;
+		}
+		if (sizeValue < 3) {
+			console.log("size is lower then 3");
+			return;
+		}
+		if (winLengthValue < 3) {
+			console.log("winLength is lower then 3");
+			return;
+		}
+		console.log("both values are valid ");
+		console.log(sizeValue, winLengthValue);
 	},
 };
