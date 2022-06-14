@@ -27,6 +27,7 @@ let InputArea = {
 			InputArea.collectData();
 		};
 		this.inputField.id = "inputField";
+		this.inputField.setAttribute("class", "gameArea");
 
 		this.inputField.appendChild(this.size);
 		this.inputField.appendChild(this.winLength);
