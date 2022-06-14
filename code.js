@@ -1,6 +1,22 @@
 let GameArea = {
-	Width: 10,
-	Height: 10,
+	size: 3,
+	winLength: 3,
+
+	gameField: document.createElement("div"),
+	gameTable: document.createElement("table"),
+
+	renderGameTable: function () {
+		for (y = 0; y < this.size; y++) {
+			var tr = document.createElement("tr");
+			for (x = 0; x < this.size; x++) {
+				var td = document.createElement("td");
+				td.innerHTML = " * ";
+				tr.appendChild(td);
+			}
+			this.gameTable.appendChild(tr);
+		}
+		document.getElementById("body").appendChild(this.gameTable);
+	},
 };
 
 let InputArea = {
@@ -65,5 +81,7 @@ let InputArea = {
 		}
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
+
+		GameArea.renderGameTable();
 	},
 };
