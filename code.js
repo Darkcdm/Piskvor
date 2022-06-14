@@ -10,7 +10,14 @@ let GameArea = {
 			var tr = document.createElement("tr");
 			for (x = 0; x < this.size; x++) {
 				var td = document.createElement("td");
-				td.innerHTML = " * ";
+				var button = document.createElement("button");
+
+				button.innerHTML = "*";
+				button.onclick = function () {
+					GameArea.playATurn(this);
+				};
+
+				td.appendChild(button);
 				tr.appendChild(td);
 			}
 			this.gameTable.appendChild(tr);
@@ -18,6 +25,7 @@ let GameArea = {
 		this.gameField.appendChild(this.gameTable);
 		document.getElementById("body").appendChild(this.gameField);
 	},
+	playATurn: function (button) {},
 };
 
 let InputArea = {
