@@ -15,7 +15,8 @@ let GameArea = {
 			}
 			this.gameTable.appendChild(tr);
 		}
-		document.getElementById("body").appendChild(this.gameTable);
+		this.gameField.appendChild(this.gameTable);
+		document.getElementById("body").appendChild(this.gameField);
 	},
 };
 
