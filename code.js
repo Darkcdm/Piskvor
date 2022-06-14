@@ -79,6 +79,9 @@ let InputArea = {
 			console.log("winLength is lower then 3");
 			return;
 		}
+		GameArea.size = sizeValue;
+		GameArea.winLength = winLengthValue;
+		console.log(GameArea.size, GameArea.winLength);
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
 
