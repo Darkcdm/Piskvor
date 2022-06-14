@@ -1,6 +1,6 @@
 let GameArea = {
-	Width: 10,
-	Height: 10,
+	size: 0,
+	winLength: 0,
 };
 
 let InputArea = {
@@ -9,6 +9,8 @@ let InputArea = {
 	size: document.createElement("input"),
 	winLength: document.createElement("input"),
 	playButton: document.createElement("button"),
+
+
 
 	load: function () {
 		this.size.type = "number";
@@ -63,6 +65,9 @@ let InputArea = {
 			console.log("winLength is lower then 3");
 			return;
 		}
+		GameArea.size = sizeValue;
+		GameArea.winLength = winLengthValue;
+		console.log(GameArea.size, GameArea.winLength);
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
 	},
