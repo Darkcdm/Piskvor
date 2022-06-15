@@ -61,6 +61,8 @@ let GameArea = {
 
 		button.innerHTML = this.currentPlayer;
 
+		this.checkWin(button);
+
 		if (this.currentPlayer == "O") {
 			button.state = "O";
 			this.currentPlayer = "X";
@@ -174,7 +176,6 @@ let GameArea = {
 			return true;
 		}
 	},
-
 	checkCrossRight: function (coords, winLength, currentPlayer) {
 		x = coords[0];
 		y = coords[1];
@@ -219,7 +220,6 @@ let GameArea = {
 			return true;
 		}
 	},
-
 	checkCrossLeft: function (coords, winLength, currentPlayer) {
 		x = coords[0];
 		y = coords[1];
@@ -267,63 +267,62 @@ let GameArea = {
 	},
 
 	/*
-	pairing function = pi
-	................................
-	[[GRID TO ID]]
-	pi(x,y) = z
+		pairing function = pi
+		................................
+		[[GRID TO ID]]
+		pi(x,y) = z
 
-	z = ( ((x+y+1)*(x+y)) /2 ) + y
-	
-	--------------------------------
-	[[ID TO GRID]]
-	w = floorDown(sqrt((z*8) + 1) - 1)  /2);
+		z = ( ((x+y+1)*(x+y)) /2 ) + y
+		
+		--------------------------------
+		[[ID TO GRID]]
+		w = floorDown(sqrt((z*8) + 1) - 1)  /2);
 
-	t = ((w+1)*w)/2;
+		t = ((w+1)*w)/2;
 
-	y = z - t;
+		y = z - t;
 
-	x = w - y;
+		x = w - y;
 
-	................................
-	Examples
-		To calculate π(47, 32):
+		................................
+		Examples
+			To calculate π(47, 32):
 
-		x + y = 79,
-		79 + 1 = 80,
-		79 × 80 = 6320,
-		6320 ÷ 2 = 3160,
-		3160 + y = 3192,
-		so π(47, 32) = 3192.
+			x + y = 79,
+			79 + 1 = 80,
+			79 × 80 = 6320,
+			6320 ÷ 2 = 3160,
+			3160 + y = 3192,
+			so π(47, 32) = 3192.
 
-		To find x and y such that π(x, y) = 3192 = z:
+			To find x and y such that π(x, y) = 3192 = z:
 
-		8 * z = 25 536,
-		25 536 + 1 = 25 537,
-		√25 537 = 159.799,
-		159.799 - 1 = 158.799,
-		159.799 / 2 = 79,8995,
-		⌊79,8995⌋ = 79,
-		-------
-		w = 79;
-		-------
+			8 * z = 25 536,
+			25 536 + 1 = 25 537,
+			√25 537 = 159.799,
+			159.799 - 1 = 158.799,
+			159.799 / 2 = 79,8995,
+			⌊79,8995⌋ = 79,
+			-------
+			w = 79;
+			-------
 
-		w + 1 = 80,
-		w * 80 = 6 320,
-		6 320 / 2 = 3160,
-		----------
-		t = 3 160;
-		----------
+			w + 1 = 80,
+			w * 80 = 6 320,
+			6 320 / 2 = 3160,
+			----------
+			t = 3 160;
+			----------
 
-		z - t = 32,
-		----------
-		y = 32;
-		----------
+			z - t = 32,
+			----------
+			y = 32;
+			----------
 
-		w - y = 78,
-		----------
-		x = 47;
-		----------
-
+			w - y = 78,
+			----------
+			x = 47;
+			----------
 	*/
 	getGridID: function (x, y) {
 		return ((x + y + 1) * (x + y)) / 2 + y;
