@@ -8,11 +8,23 @@ let GameArea = {
 	gameBillboard: document.createElement("div"),
 
 	load: function () {
-		this.renderGameBillboard();
 		this.renderGameTable();
+		this.renderGameBillboard();
 	},
 
-	renderGameBillboard: function () {},
+	renderGameBillboard: function () {
+		if (document.getElementById("heading")) {
+			document.getElementById("heading").remove();
+		}
+
+		var heading = document.createElement("h5");
+		heading.id = "heading";
+		heading.innerHTML = "Current player is: " + this.currentPlayer;
+
+		this.gameBillboard.appendChild(heading);
+
+		document.getElementById("body").appendChild(this.gameBillboard);
+	},
 
 	renderGameTable: function () {
 		for (y = 0; y < this.size; y++) {
@@ -24,6 +36,7 @@ let GameArea = {
 				button.innerHTML = "*";
 				button.onclick = function () {
 					GameArea.playATurn(this);
+					GameArea.renderGameBillboard();
 				};
 				button.playable = true;
 
