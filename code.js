@@ -5,6 +5,14 @@ let GameArea = {
 
 	gameField: document.createElement("div"),
 	gameTable: document.createElement("table"),
+	gameBillboard: document.createElement("div"),
+
+	load: function () {
+		this.renderGameBillboard();
+		this.renderGameTable();
+	},
+
+	renderGameBillboard: function () {},
 
 	renderGameTable: function () {
 		for (y = 0; y < this.size; y++) {
@@ -66,6 +74,7 @@ let InputArea = {
 
 		this.playButton.onclick = function () {
 			InputArea.collectData();
+			GameArea.load();
 		};
 		this.inputField.id = "inputField";
 		this.inputField.setAttribute("class", "gameArea");
@@ -109,7 +118,5 @@ let InputArea = {
 		console.log(GameArea.size, GameArea.winLength);
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
-
-		GameArea.renderGameTable();
 	},
 };
