@@ -17,6 +17,7 @@ let GameArea = {
 				button.onclick = function () {
 					GameArea.playATurn(this);
 				};
+				button.playable = true;
 
 				td.appendChild(button);
 				tr.appendChild(td);
@@ -27,6 +28,10 @@ let GameArea = {
 		document.getElementById("body").appendChild(this.gameField);
 	},
 	playATurn: function (button) {
+		if (!button.playable) {
+			return;
+		}
+
 		button.innerHTML = this.currentPlayer;
 
 		if (this.currentPlayer == "O") {
@@ -34,6 +39,7 @@ let GameArea = {
 		} else {
 			this.currentPlayer = "O";
 		}
+		button.playable = false;
 	},
 	checkWin: function (button) {},
 };
