@@ -78,17 +78,17 @@ let GameArea = {
 		winLength = this.winLength;
 		currentPlayer = this.currentPlayer;
 
-		if (!this.checkTopDown(coords, winLength, currentPlayer)) {
-			return;
+		if (this.checkTopDown(coords, winLength, currentPlayer)) {
+			this.winMessage();
 		}
-		if (!this.checkLeftRight(button)) {
-			return;
+		if (this.checkLeftRight(coords, winLength, currentPlayer)) {
+			this.winMessage();
 		}
-		if (!this.checkCross(button)) {
-			return;
+		if (this.checkCrossRight(coords, winLength, currentPlayer)) {
+			this.winMessage();
 		}
-		if (!this.checkTopDown(button)) {
-			return;
+		if (this.checkCrossLeft(coords, winLength, currentPlayer)) {
+			this.winMessage();
 		}
 	},
 	checkTopDown: function (coords, winLength, currentPlayer) {
@@ -98,12 +98,15 @@ let GameArea = {
 		counted = 0;
 		//checking up
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -113,12 +116,15 @@ let GameArea = {
 		//checking down
 		y = coords[1] - 1;
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -139,35 +145,39 @@ let GameArea = {
 		counted = 0;
 		//checking up
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
 			}
 			x--;
-			y--;
 		}
 		//checking down
 		x = coords[0] + 1;
-		y = coords[1] + 1;
+
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
 			}
 			x++;
-			y++;
 		}
 
 		if (counted < winLength) {
@@ -183,12 +193,15 @@ let GameArea = {
 		counted = 0;
 		//checking up
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -201,11 +214,14 @@ let GameArea = {
 		y = coords[1] + 1;
 
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -227,12 +243,15 @@ let GameArea = {
 		counted = 0;
 		//checking up
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -245,12 +264,15 @@ let GameArea = {
 		y = coords[1] - 1;
 
 		while (true) {
+			if (x < 0 || y < 0) {
+				break;
+			}
 			button = document.getElementById(this.getGridID(x, y));
 			if (!button) {
 				break;
 			}
 
-			if (button.state == currentPlayer) {
+			if (button.innerHTML == currentPlayer) {
 				counted++;
 			} else {
 				break;
@@ -340,13 +362,12 @@ let GameArea = {
 		return coords;
 	},
 	winMessage: function () {
-		if(this.currentPlayer == "O") {
+		if (this.currentPlayer == "O") {
 			alert("Player O is the winner");
-		}
-		else{
+		} else {
 			alert("Player X is the winner");
 		}
-	}
+	},
 };
 
 let InputArea = {
