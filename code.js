@@ -8,6 +8,10 @@ let GameArea = {
 	gameBillboard: document.createElement("div"),
 
 	load: function () {
+		if (this.gameField) {
+			this.gameField.remove();
+		}
+
 		this.renderGameTable();
 		this.renderGameBillboard();
 	},
