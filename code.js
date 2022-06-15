@@ -62,21 +62,209 @@ let GameArea = {
 		button.innerHTML = this.currentPlayer;
 
 		if (this.currentPlayer == "O") {
-			button.state = "O"
+			button.state = "O";
 			this.currentPlayer = "X";
 		} else {
-			button.state = "X"
+			button.state = "X";
 			this.currentPlayer = "O";
 		}
-	//	button.state = false;
+		//	button.state = false;
 	},
-	checkWin: function (button) {},
-	checkTopDown: function (button) {},
-	checkLeftRight: function (button) {},
+	checkWin: function (button) {
+		centerID = button.id;
+		coords = this.getGridCoords(centerID);
+		winLength = this.winLength;
+		currentPlayer = this.currentPlayer;
 
-	checkCrossRight: function (button) {},
+		if (!this.checkTopDown(coords, winLength, currentPlayer)) {
+			return;
+		}
+		if (!this.checkLeftRight(button)) {
+			return;
+		}
+		if (!this.checkCross(button)) {
+			return;
+		}
+		if (!this.checkTopDown(button)) {
+			return;
+		}
+	},
+	checkTopDown: function (coords, winLength, currentPlayer) {
+		x = coords[0];
+		y = coords[1];
 
-	checkCrossLeft: function (button) {},
+		counted = 0;
+		//checking up
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			y++;
+		}
+		//checking down
+		y = coords[1] - 1;
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			y--;
+		}
+
+		if (counted < winLength) {
+			return false;
+		} else {
+			return true;
+		}
+	},
+	checkLeftRight: function (coords, winLength, currentPlayer) {
+		x = coords[0];
+		y = coords[1];
+
+		counted = 0;
+		//checking up
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x--;
+			y--;
+		}
+		//checking down
+		x = coords[0] + 1;
+		y = coords[1] + 1;
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x++;
+			y++;
+		}
+
+		if (counted < winLength) {
+			return false;
+		} else {
+			return true;
+		}
+	},
+
+	checkCrossRight: function (coords, winLength, currentPlayer) {
+		x = coords[0];
+		y = coords[1];
+
+		counted = 0;
+		//checking up
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x++;
+			y--;
+		}
+		//checking down
+		x = coords[0] - 1;
+		y = coords[1] + 1;
+
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x--;
+			y++;
+		}
+
+		if (counted < winLength) {
+			return false;
+		} else {
+			return true;
+		}
+	},
+
+	checkCrossLeft: function (coords, winLength, currentPlayer) {
+		x = coords[0];
+		y = coords[1];
+
+		counted = 0;
+		//checking up
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x++;
+			y++;
+		}
+		//checking down
+		x = coords[0] - 1;
+		y = coords[1] - 1;
+
+		while (true) {
+			button = document.getElementById(this.getGridID(x, y));
+			if (!button) {
+				break;
+			}
+
+			if (button.state == currentPlayer) {
+				counted++;
+			} else {
+				break;
+			}
+			x--;
+			y--;
+		}
+
+		if (counted < winLength) {
+			return false;
+		} else {
+			return true;
+		}
+	},
 
 	/*
 	pairing function = pi
