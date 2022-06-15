@@ -128,11 +128,20 @@ let GameArea = {
 		----------
 
 	*/
-	getGridID:function (){
-		
+	getGridID:function (x, y){
+		return ( ((x+y+1)*(x+y)) /2 ) + y;
 	},
-	getGridCoords: function (){
+	getGridCoords: function (z){
+		w = Math.floor((Math.sqrt((z*8) + 1) - 1)  /2);
 
+		t = ((w+1)*w)/2;
+	
+		y = z - t;
+	
+		x = w - y;
+
+		const coords = [x, y];
+		return coords;
 	}
 };
 
