@@ -1,6 +1,7 @@
 let GameArea = {
 	size: 3,
 	winLength: 3,
+	currentPlayer: "O",
 
 	gameField: document.createElement("div"),
 	gameTable: document.createElement("table"),
@@ -25,7 +26,16 @@ let GameArea = {
 		this.gameField.appendChild(this.gameTable);
 		document.getElementById("body").appendChild(this.gameField);
 	},
-	playATurn: function (button) {},
+	playATurn: function (button) {
+		button.innerHTML = this.currentPlayer;
+
+		if (this.currentPlayer == "O") {
+			this.currentPlayer = "X";
+		} else {
+			this.currentPlayer = "O";
+		}
+	},
+	checkWin: function (button) {},
 };
 
 let InputArea = {
