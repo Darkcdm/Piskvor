@@ -8,6 +8,7 @@ let GameArea = {
 	gameBillboard: document.createElement("div"),
 
 	load: function () {
+		InputArea.inputField.remove();
 		if (this.gameField) {
 			this.gameField.remove();
 		}
@@ -68,6 +69,12 @@ let GameArea = {
 		button.playable = false;
 	},
 	checkWin: function (button) {},
+	checkTopDown: function (button) {},
+	checkLeftRight: function (button) {},
+
+	checkCrossRight: function (button) {},
+
+	checkCrossLeft: function (button) {},
 
 	/*
 	pairing function = pi
@@ -211,7 +218,6 @@ let InputArea = {
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
 
-		this.inputField.remove();
 		GameArea.load();
 	},
 };
