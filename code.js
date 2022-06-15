@@ -8,6 +8,7 @@ let GameArea = {
 	gameBillboard: document.createElement("div"),
 
 	load: function () {
+		InputArea.inputField.remove();
 		if (this.gameField) {
 			this.gameField.remove();
 		}
@@ -43,6 +44,7 @@ let GameArea = {
 					GameArea.renderGameBillboard();
 				};
 				button.state = null;
+				button.id = this.getGridID(x, y);
 
 				td.appendChild(button);
 				tr.appendChild(td);
@@ -69,7 +71,12 @@ let GameArea = {
 	//	button.state = false;
 	},
 	checkWin: function (button) {},
+	checkTopDown: function (button) {},
+	checkLeftRight: function (button) {},
 
+	checkCrossRight: function (button) {},
+
+	checkCrossLeft: function (button) {},
 
 	/*
 	pairing function = pi
@@ -130,21 +137,21 @@ let GameArea = {
 		----------
 
 	*/
-	getGridID:function (x, y){
-		return ( ((x+y+1)*(x+y)) /2 ) + y;
+	getGridID: function (x, y) {
+		return ((x + y + 1) * (x + y)) / 2 + y;
 	},
-	getGridCoords: function (z){
-		w = Math.floor((Math.sqrt((z*8) + 1) - 1)  /2);
+	getGridCoords: function (z) {
+		w = Math.floor((Math.sqrt(z * 8 + 1) - 1) / 2);
 
-		t = ((w+1)*w)/2;
-	
+		t = ((w + 1) * w) / 2;
+
 		y = z - t;
-	
+
 		x = w - y;
 
 		const coords = [x, y];
 		return coords;
-	}
+	},
 };
 
 let InputArea = {
@@ -169,9 +176,6 @@ let InputArea = {
 
 		this.playButton.onclick = function () {
 			InputArea.collectData();
-				
-			
-			
 		};
 		this.inputField.id = "inputField";
 		this.inputField.setAttribute("class", "gameArea");
@@ -215,8 +219,7 @@ let InputArea = {
 		console.log(GameArea.size, GameArea.winLength);
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
-		
-		this.inputField.remove();
+
 		GameArea.load();
 	},
 };
