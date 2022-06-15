@@ -42,7 +42,7 @@ let GameArea = {
 					GameArea.playATurn(this);
 					GameArea.renderGameBillboard();
 				};
-				button.playable = true;
+				button.state = null;
 
 				td.appendChild(button);
 				tr.appendChild(td);
@@ -53,18 +53,20 @@ let GameArea = {
 		document.getElementById("body").appendChild(this.gameField);
 	},
 	playATurn: function (button) {
-		if (!button.playable) {
+		if (button.state) {
 			return;
 		}
 
 		button.innerHTML = this.currentPlayer;
 
 		if (this.currentPlayer == "O") {
+			button.state = "O"
 			this.currentPlayer = "X";
 		} else {
+			button.state = "X"
 			this.currentPlayer = "O";
 		}
-		button.playable = false;
+	//	button.state = false;
 	},
 	checkWin: function (button) {},
 
