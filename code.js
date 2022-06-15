@@ -87,7 +87,9 @@ let InputArea = {
 
 		this.playButton.onclick = function () {
 			InputArea.collectData();
-			GameArea.load();
+				
+			
+			
 		};
 		this.inputField.id = "inputField";
 		this.inputField.setAttribute("class", "gameArea");
@@ -131,5 +133,8 @@ let InputArea = {
 		console.log(GameArea.size, GameArea.winLength);
 		console.log("both values are valid ");
 		console.log(sizeValue, winLengthValue);
+		
+		this.inputField.remove();
+		GameArea.load();
 	},
 };
