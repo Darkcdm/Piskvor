@@ -152,6 +152,14 @@ let GameArea = {
 		const coords = [x, y];
 		return coords;
 	},
+	winMessage: function () {
+		if(this.currentPlayer == "O") {
+			alert("Player O is the winner");
+		}
+		else{
+			alert("Player X is the winner");
+		}
+	}
 };
 
 let InputArea = {
